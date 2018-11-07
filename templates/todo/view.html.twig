@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TODO #{{ todo.getId }}{% endblock %}
+
+{% block body %}
+    <table class="table">
+        <tbody>
+        <tr>
+            <td>
+                id
+            </td>
+            <td>
+                {{ todo.getId }}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                title
+            </td>
+            <td>
+                {{ todo.getTitle }}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                created at
+            </td>
+            <td>
+                {{ todo.getCreatedAt.format('d.m.Y H:i:s') }}
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p>
+        <a href="/" class="btn btn-sm btn-outline-success">Back to list</a>
+        <a href="/todo/update/{{ todo.getId }}" class="btn btn-sm btn-outline-warning">Edit</a>
+        <a href="/todo/delete/{{ todo.getId }}" class="btn btn-sm btn-outline-danger js-delete">Delete</a>
+    </p>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/js/crud.js"></script>
+{% endblock %}

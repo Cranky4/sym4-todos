@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TODO{% endblock %}
+
+{% block body %}
+    <p>
+        <a href="/todo/new" class="btn btn-sm btn-primary">Create new todo</a>
+    </p>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>
+                TODO
+            </th>
+            <th>
+                Created
+            </th>
+            <th>
+                Is active
+            </th>
+            <th>&nbsp;</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for todo in todos %}
+            <tr>
+                <td>{{ todo.getTitle }}</td>
+                <td>{{ todo.getCreatedAt.format('d.m.Y H:i:s') }}</td>
+                <td>{{ todo.getIsActive }}</td>
+                <td>
+                    <a href="/todo/view/{{ todo.getId }}" class="btn btn-sm btn-outline-success">View</a>
+                    <a href="/todo/update/{{ todo.getId }}" class="btn btn-sm btn-outline-warning">Edit</a>
+                    <a href="/todo/delete/{{ todo.getId }}" class="btn btn-sm btn-outline-danger js-delete"
+                       data-id="{{ todo.getId }}">Delete</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">
+                    <p>Congratulations! Todos not found. Go get some rest!</p>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/js/crud.js"></script>
+{% endblock %}
