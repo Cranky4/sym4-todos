@@ -1,0 +1,39 @@
+# Версия docker-compose
+version: '3.1'
+services:
+    nginx:
+        image: nginx:1.15-alpine
+        container_name: 'nginx'
+        working_dir: '/app'
+        ports:
+            - "80:80"
+            - "443:443"
+        volumes:
+            - ../:/app:cached #:cached - docker for mac issue
+            - ./nginx/hosts.conf:/etc/nginx/conf.d/sym4.conf
+            - ./data/logs:/var/log/nginx:cached #:cached - docker for mac issue
+        links:
+            - php
+
+    php:
+        build: ./php
+        container_name: 'php'
+        working_dir: '/app'
+        links:
+            - mysql
+        volumes:
+            - ../:/app:cached #:cached - docker for mac issue
+            - ./php/php.ini:/usr/local/etc/php/conf.d/40-custom.ini
+
+    mysql:
+        image: mysql:8.0.13
+        container_name: mysql
+        command: --default-authentication-plugin=mysql_native_password
+        restart: always
+        ports:
+            - "3306:3306"
+        volumes:
+            - ./mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+            - ./data/mysql:/var/lib/mysql #:cached - docker for mac issue
+        environment:
+            MYSQL_ROOT_PASSWORD: secret
