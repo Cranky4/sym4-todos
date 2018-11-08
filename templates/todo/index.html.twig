@@ -49,5 +49,6 @@
 {% endblock %}
 
 {% block javascripts %}
+    {{ parent() }}
     <script src="{{ asset('js/crud.js') }}"></script>
 {% endblock %}
