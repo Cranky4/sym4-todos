@@ -33,12 +33,12 @@
     </table>
 
     <p>
-        <a href="/" class="btn btn-sm btn-outline-success">Back to list</a>
-        <a href="/todo/update/{{ todo.getId }}" class="btn btn-sm btn-outline-warning">Edit</a>
-        <a href="/todo/delete/{{ todo.getId }}" class="btn btn-sm btn-outline-danger js-delete">Delete</a>
+        <a href="{{ path('todos') }}" class="btn btn-sm btn-outline-success">Back to list</a>
+        <a href="{{ path('edit_todo', {id: todo.getId}) }}" class="btn btn-sm btn-outline-warning">Edit</a>
+        <a href="{{ path('delete_todo', {id: todo.getId}) }}" class="btn btn-sm btn-outline-danger js-delete">Delete</a>
     </p>
 {% endblock %}
 
 {% block javascripts %}
-    <script src="/js/crud.js"></script>
+    <script src="{{ asset('js/crud.js') }}"></script>
 {% endblock %}

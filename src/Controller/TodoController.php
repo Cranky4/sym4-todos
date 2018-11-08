@@ -99,7 +99,7 @@ class TodoController extends AbstractController
             return $this->redirectToRoute('todos');
         }
 
-        return $this->render('todo/form.html.twig', [
+        return $this->render('todo/form.form.twig', [
             'form' => $form->createView(),
             'todo' => $todo
         ]);

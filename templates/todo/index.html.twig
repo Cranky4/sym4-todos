@@ -29,9 +29,11 @@
                 <td>{{ todo.getCreatedAt.format('d.m.Y H:i:s') }}</td>
                 <td>{{ todo.getIsActive }}</td>
                 <td>
-                    <a href="/todo/view/{{ todo.getId }}" class="btn btn-sm btn-outline-success">View</a>
-                    <a href="/todo/update/{{ todo.getId }}" class="btn btn-sm btn-outline-warning">Edit</a>
-                    <a href="/todo/delete/{{ todo.getId }}" class="btn btn-sm btn-outline-danger js-delete"
+                    <a href="{{ path('todo', {id: todo.getId}) }}" class="btn btn-sm btn-outline-success">View</a>
+                    <a href="{{ path('edit_todo', {id: todo.getId}) }}"
+                       class="btn btn-sm btn-outline-warning">Edit</a>
+                    <a href="{{ path('delete_todo', {id: todo.getId}) }}"
+                       class="btn btn-sm btn-outline-danger js-delete"
                        data-id="{{ todo.getId }}">Delete</a>
                 </td>
             </tr>
@@ -47,5 +49,5 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script src="/js/crud.js"></script>
+    <script src="{{ asset('js/crud.js') }}"></script>
 {% endblock %}
